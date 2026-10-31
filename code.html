@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="mobile_tab" name="shell-type"/>
+<title>PocketLedger - Keuangan Mahasiswa</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-primary": "#95d2c7",
+            "surface-variant": "#dae2fd",
+            "tertiary-fixed-dim": "#bccac0",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#9cf2e8",
+            "on-error": "#ffffff",
+            "secondary-fixed-dim": "#80d5cb",
+            "on-surface": "#131b2e",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#d8e6dc",
+            "surface-container": "#eaedff",
+            "on-surface-variant": "#3f4947",
+            "secondary-container": "#99efe5",
+            "background": "#faf8ff",
+            "outline-variant": "#bfc9c6",
+            "secondary": "#006a63",
+            "on-primary-container": "#81beb3",
+            "surface-container-high": "#e2e7ff",
+            "surface-bright": "#faf8ff",
+            "surface-container-low": "#f2f3ff",
+            "on-primary-fixed": "#00201c",
+            "surface-tint": "#2a685f",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#283044",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#dae2fd",
+            "outline": "#707977",
+            "primary-fixed": "#b0efe3",
+            "on-secondary-fixed-variant": "#00504a",
+            "primary-container": "#044e46",
+            "on-tertiary-container": "#a8b6ad",
+            "primary-fixed-dim": "#95d2c7",
+            "on-background": "#131b2e",
+            "inverse-on-surface": "#eef0ff",
+            "on-primary-fixed-variant": "#085048",
+            "tertiary": "#25312b",
+            "tertiary-container": "#3b4841",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#121e18",
+            "surface": "#faf8ff",
+            "on-tertiary-fixed-variant": "#3d4a43",
+            "primary": "#00352f",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#006f67",
+            "on-secondary-fixed": "#00201d",
+            "surface-dim": "#d2d9f4"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            "space-sm": "0.5rem",
+            "margin-desktop": "3rem",
+            "gutter-desktop": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            gutter: "1rem",
+            margin: "1.25rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "margin-tablet": "2rem"
+          },
+          fontFamily: {
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "currency-display-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            display: ["Plus Jakarta Sans"],
+            "currency-display": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "label-lg": ["0.875rem", {lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "600"}],
+            "headline-md": ["1.375rem", {lineHeight: "1.875rem", letterSpacing: "-0.015em", fontWeight: "600"}],
+            "currency-display-mobile": ["1.875rem", {lineHeight: "2.25rem", letterSpacing: "-0.025em", fontWeight: "700"}],
+            "label-md": ["0.75rem", {lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "500"}],
+            display: ["3rem", {lineHeight: "3.5rem", letterSpacing: "-0.03em", fontWeight: "700"}],
+            "currency-display": ["2.25rem", {lineHeight: "2.75rem", letterSpacing: "-0.03em", fontWeight: "700"}],
+            "headline-sm": ["1.125rem", {lineHeight: "1.625rem", letterSpacing: "-0.01em", fontWeight: "600"}],
+            "body-md": ["0.875rem", {lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "400"}],
+            "body-lg": ["1rem", {lineHeight: "1.625rem", letterSpacing: "0em", fontWeight: "400"}],
+            "headline-lg": ["2rem", {lineHeight: "2.5rem", letterSpacing: "-0.025em", fontWeight: "600"}],
+            "headline-lg-mobile": ["1.625rem", {lineHeight: "2.125rem", letterSpacing: "-0.02em", fontWeight: "600"}]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior-y: none;
+      }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+    @keyframes scanMove {
+      0% { top: 10%; opacity: 0.8; }
+      50% { top: 85%; opacity: 1; }
+      100% { top: 10%; opacity: 0.8; }
+    }
+    .scanner-beam {
+      animation: scanMove 2.2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased flex flex-col h-full overflow-hidden select-none">
+<!-- Fixed Top Header -->
+<header class="fixed top-0 inset-x-0 z-40 bg-surface/85 backdrop-blur-xl border-b border-surface-container-high/40 pt-safe">
+<div class="h-16 px-margin max-w-[640px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">PocketLedger</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container/60 text-on-secondary-container font-label-md text-label-md font-medium">Mahasiswa</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button aria-label="Profil Alex" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm hover:opacity-90 active:scale-95 transition-transform" id="btnProfileQuick" type="button">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Content Area -->
+<main class="flex-1 w-full max-w-[640px] mx-auto overflow-y-auto custom-scroll pt-20 pb-28 px-margin bg-surface" id="mainScrollArea">
+<div class="flex flex-col w-full gap-space-lg">
+<!-- 1. Top Welcome Bar -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col gap-0.5">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-semibold tracking-tight">Halo, Alex</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Minggu ke-7 Kuliah • Kampus Salemba</p>
+</div>
+<div class="w-11 h-11 rounded-full overflow-hidden shadow-sm ring-2 ring-primary/10">
+<img alt="Alex - Mahasiswa" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJytCbkGbBYVCuSX02CB50MX4ClPAHcMsomPFxxE4pzU8BRkDZ0JX7oJkgX2qn9R7gXtJURFiHX4SX9K0qfyx8VpHUrIuNAHrjxCnniLtRqE5i3hcuz-iEDazy-XXNolMWw0-oRKrPnnmVTD7HskGwneVDD3YX3KD-PXkykL5649unUgZ99Ez-Rs3GvBVb-w_2T5AIlIdB_6FXNhyxI8CkNN52_FfEhS1j0xwNgSBU"/>
+</div>
+</div>
+<!-- 2. Clean Balance Section -->
+<section class="flex flex-col bg-surface-container-lowest p-space-md rounded-xl shadow-sm gap-space-md border border-surface-container/60">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium uppercase tracking-wider">Total Saldo Tersedia</span>
+<button class="text-secondary p-1 -mr-1 rounded-full hover:bg-secondary-container/30 transition-colors" id="btnToggleBalance" title="Sembunyikan / Tampilkan" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-currency-display-mobile text-currency-display-mobile text-on-surface font-bold tracking-tight transition-all duration-300" id="displayBalance">Rp 2.450.000</span>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Batas aman harian: <span class="font-semibold text-secondary">Rp 35.000</span> / hari</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<button class="h-12 rounded-xl bg-primary-container hover:bg-primary text-on-primary flex items-center justify-center gap-2 font-label-lg text-label-lg transition-all active:scale-[0.97] shadow-sm" id="btnOpenTransfer" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Kirim Uang</span>
+</button>
+<button class="h-12 rounded-xl bg-surface-container hover:bg-surface-container-high text-primary flex items-center justify-center gap-2 font-label-lg text-label-lg transition-all active:scale-[0.97]" id="btnOpenQRIS" type="button">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+<span>Top Up / QRIS</span>
+</button>
+</div>
+</section>
+<!-- NEW: Shortcut Fitur Bayar Cepat Mahasiswa (Kantin & KRL) -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center justify-between px-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant font-medium tracking-wide">PINTASAN BAYAR CEPAT</span>
+<span class="font-label-md text-label-md text-secondary">1-Klik Bayar</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm">
+<button class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-surface-container-lowest border border-surface-container hover:border-secondary transition-all active:scale-95 text-center gap-1 shadow-xs" onclick="quickPayPreset('Kantin Salemba', 18000, 'restaurant')" type="button">
+<span class="w-8 h-8 rounded-full bg-secondary-container/70 text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">fastfood</span>
+<span class="font-label-md text-[11px] font-semibold text-on-surface truncate w-full">Paket Makan</span>
+<span class="text-[10px] text-on-surface-variant">Rp 18.000</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-surface-container-lowest border border-surface-container hover:border-secondary transition-all active:scale-95 text-center gap-1 shadow-xs" onclick="quickPayPreset('Tiket KRL Commuter', 5000, 'directions_subway')" type="button">
+<span class="w-8 h-8 rounded-full bg-secondary-container/70 text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">train</span>
+<span class="font-label-md text-[11px] font-semibold text-on-surface truncate w-full">KRL Pulang</span>
+<span class="text-[10px] text-on-surface-variant">Rp 5.000</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2.5 rounded-xl bg-surface-container-lowest border border-surface-container hover:border-secondary transition-all active:scale-95 text-center gap-1 shadow-xs" onclick="quickPayPreset('Fotokopi Materi Kuliah', 7500, 'print')" type="button">
+<span class="w-8 h-8 rounded-full bg-secondary-container/70 text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">menu_book</span>
+<span class="font-label-md text-[11px] font-semibold text-on-surface truncate w-full">Fotokopi</span>
+<span class="text-[10px] text-on-surface-variant">Rp 7.500</span>
+</button>
+</div>
+</section>
+<!-- 3. Summary Row: Inflow / Outflow Split -->
+<section class="grid grid-cols-2 gap-space-sm">
+<div class="flex flex-col p-space-md bg-surface-container-lowest rounded-xl shadow-sm gap-1 border border-surface-container/60 cursor-pointer active:scale-[0.98] transition-transform" onclick="showToast('Total Inflow: Dari orang tua (Rp 1.2jt) &amp; beasiswa (Rp 300rb)')">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]">arrow_downward_alt</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Pemasukan Bulan Ini</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary font-semibold mt-1">+Rp 1.500.000</span>
+</div>
+<div class="flex flex-col p-space-md bg-surface-container-lowest rounded-xl shadow-sm gap-1 border border-surface-container/60 cursor-pointer active:scale-[0.98] transition-transform" onclick="showToast('Total Outflow: Terkendali di bawah batas bulanan Rp 2.0jt')">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">arrow_upward_alt</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Pengeluaran</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1">Rp 1.850.000</span>
+</div>
+</section>
+<!-- 4. Pengeluaran per Kategori -->
+<section class="flex flex-col bg-surface-container-lowest p-space-md rounded-xl shadow-sm gap-space-md border border-surface-container/60">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Pengeluaran per Kategori</h2>
+<div class="flex items-center gap-1 bg-surface-container-low rounded-lg p-0.5">
+<button class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white text-secondary shadow-xs" id="catFilterMonth" onclick="switchCategoryFilter('month')">Bulan Ini</button>
+<button class="px-2 py-0.5 rounded-md text-[11px] font-medium text-on-surface-variant hover:text-on-surface" id="catFilterWeek" onclick="switchCategoryFilter('week')">Minggu Ini</button>
+</div>
+</div>
+<div class="flex flex-col gap-space-md" id="categoryContainer">
+<!-- Item 1: Makanan & Kantin -->
+<div class="flex flex-col gap-2 p-1.5 rounded-lg hover:bg-surface-container-low/60 transition-colors cursor-pointer" onclick="showToast('Makanan: 14 transaksi kantin terdaftar')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Makanan &amp; Kantin</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-body-md text-body-md text-on-surface font-semibold" id="catAmount1">Rp 780.000</span>
+<span class="font-label-md text-label-md text-on-surface-variant" id="catPct1">42%</span>
+</div>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" id="catBar1" style="width: 42%;"></div>
+</div>
+</div>
+<!-- Item 2: Transport & KRL -->
+<div class="flex flex-col gap-2 p-1.5 rounded-lg hover:bg-surface-container-low/60 transition-colors cursor-pointer" onclick="showToast('Transport: Rata-rata KRL Rp 12.000/hari')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">directions_subway</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Transport &amp; KRL</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-body-md text-body-md text-on-surface font-semibold" id="catAmount2">Rp 460.000</span>
+<span class="font-label-md text-label-md text-on-surface-variant" id="catPct2">25%</span>
+</div>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" id="catBar2" style="width: 25%;"></div>
+</div>
+</div>
+<!-- Item 3: Buku & Fotokopi -->
+<div class="flex flex-col gap-2 p-1.5 rounded-lg hover:bg-surface-container-low/60 transition-colors cursor-pointer" onclick="showToast('Buku: Modul semester &amp; materi kuliah')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Buku &amp; Fotokopi</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-body-md text-body-md text-on-surface font-semibold" id="catAmount3">Rp 370.000</span>
+<span class="font-label-md text-label-md text-on-surface-variant" id="catPct3">20%</span>
+</div>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" id="catBar3" style="width: 20%;"></div>
+</div>
+</div>
+<!-- Item 4: Nongkrong / Kopi -->
+<div class="flex flex-col gap-2 p-1.5 rounded-lg hover:bg-surface-container-low/60 transition-colors cursor-pointer" onclick="showToast('Nongkrong: Tersisa 2 kuota ngopi minggu ini')">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">local_cafe</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Nongkrong / Kopi</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-body-md text-body-md text-on-surface font-semibold" id="catAmount4">Rp 240.000</span>
+<span class="font-label-md text-label-md text-on-surface-variant" id="catPct4">13%</span>
+</div>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" id="catBar4" style="width: 13%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Campus Life Visual Accent Card -->
+<div class="relative w-full h-32 rounded-xl overflow-hidden shadow-sm flex items-end p-space-md">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAM857wjx_xgKLyGTbj0sXWbJSaVezJ4bCkH96ABRYPiaKRaPeC6JeKx6shvLp5UC4zYMZi5jeuFn-MV_I093vJMamL0YZbyVcPUBeR0HaVcd9PC0p4oCRkXXQKYwGgb41-lB8E88VzJKK-ClPO_TIgkXQDW5xDXN6TXMg-5fxtsLLVJVneFfUzPEnzIhV5JL1zdQQP8bTaA511WecYFaI1wq7SJkTv0jtSznxSQsel')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between w-full text-on-primary">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold">Sisa Minggu Ini</span>
+<span class="font-label-md text-label-md opacity-90">14 hari menuju transfer bulanan berikutnya</span>
+</div>
+<button class="w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center hover:bg-white/25 active:scale-95 transition-all" onclick="showToast('Pengingat: Jadwal kiriman tgl 1 bulan depan')">
+<span class="material-symbols-outlined text-secondary-fixed text-[22px]">school</span>
+</button>
+</div>
+</div>
+<!-- 5. Transaksi Terakhir -->
+<section class="flex flex-col bg-surface-container-lowest p-space-md rounded-xl shadow-sm gap-space-md border border-surface-container/60 mb-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Transaksi Terakhir</h2>
+<button class="font-label-md text-label-md text-secondary font-medium hover:underline" id="btnViewAllTransactions" onclick="showToast('Menampilkan seluruh 28 riwayat bulan ini')" type="button">Lihat Semua</button>
+</div>
+<div class="flex flex-col gap-space-md divide-y divide-surface-container-low" id="transactionList">
+<!-- Row 1 -->
+<div class="flex items-center justify-between pt-1 cursor-pointer hover:bg-surface-container-low/40 p-1.5 rounded-lg transition-colors" onclick="showTransactionDetail('Toko Buku Kampus', 'Rp 125.000', '23 Okt, 14:15', 'Modul Kuliah Semester')">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">store</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Toko Buku Kampus</span>
+<span class="font-label-md text-label-md text-on-surface-variant">23 Okt, 14:15</span>
+</div>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold shrink-0">-Rp 125.000</span>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center justify-between pt-2 cursor-pointer hover:bg-surface-container-low/40 p-1.5 rounded-lg transition-colors" onclick="showTransactionDetail('Kantin Rumpun Ilmu', 'Rp 28.000', '23 Okt, 12:40', 'Makan Siang &amp; Es Teh')">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">lunch_dining</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Kantin Rumpun Ilmu</span>
+<span class="font-label-md text-label-md text-on-surface-variant">23 Okt, 12:40</span>
+</div>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold shrink-0">-Rp 28.000</span>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center justify-between pt-2 cursor-pointer hover:bg-surface-container-low/40 p-1.5 rounded-lg transition-colors" onclick="showTransactionDetail('Top-up KRL', 'Rp 50.000', '22 Okt, 09:10', 'Kartu Multi Trip')">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">train</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Top-up KRL</span>
+<span class="font-label-md text-label-md text-on-surface-variant">22 Okt, 09:10</span>
+</div>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold shrink-0">-Rp 50.000</span>
+</div>
+<!-- Row 4 -->
+<div class="flex items-center justify-between pt-2 cursor-pointer hover:bg-surface-container-low/40 p-1.5 rounded-lg transition-colors" onclick="showTransactionDetail('Kopi Janji Jiwa', 'Rp 22.000', '21 Okt, 16:30', 'Kopi Susu Senja')">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">coffee</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-md text-on-surface font-medium truncate">Kopi Janji Jiwa</span>
+<span class="font-label-md text-label-md text-on-surface-variant">21 Okt, 16:30</span>
+</div>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-semibold shrink-0">-Rp 22.000</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Fixed Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 z-40 pb-safe bg-surface/85 backdrop-blur-xl border-t border-surface-container-high/40 shadow-[0_-2px_12px_rgba(0,0,0,0.04)]">
+<div class="max-w-[640px] mx-auto h-20 px-margin flex items-center justify-between">
+<button class="nav-item min-w-[48px] min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-primary font-semibold" onclick="switchNavTab(this, 'Beranda')" type="button">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-md text-label-md">Beranda</span>
+</button>
+<button class="nav-item min-w-[48px] min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" onclick="switchNavTab(this, 'Anggaran')" type="button">
+<span class="material-symbols-outlined text-[24px]">pie_chart</span>
+<span class="font-label-md text-label-md">Anggaran</span>
+</button>
+<!-- Center Plus Button -->
+<div class="flex items-center justify-center">
+<button aria-label="Catat Transaksi Cepat" class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center hover:bg-secondary active:scale-95 transition-all shadow-[0_6px_16px_rgba(4,78,70,0.28)]" id="btnQuickAdd" type="button">
+<span class="material-symbols-outlined text-[26px]">add</span>
+</button>
+</div>
+<button class="nav-item min-w-[48px] min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" onclick="switchNavTab(this, 'Analisis')" type="button">
+<span class="material-symbols-outlined text-[24px]">insights</span>
+<span class="font-label-md text-label-md">Analisis</span>
+</button>
+<button class="nav-item min-w-[48px] min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors" onclick="switchNavTab(this, 'Profil')" type="button">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+<span class="font-label-md text-label-md">Profil</span>
+</button>
+</div>
+</nav>
+<!-- ==================== MODALS & BOTTOM SHEETS ==================== -->
+<!-- 1. Modal: Kirim Uang (Transfer Teman Kos / Bank) -->
+<div aria-labelledby="modalTransferTitle" aria-modal="true" class="fixed inset-0 z-50 hidden" id="modalTransfer" role="dialog">
+<div class="modal-backdrop fixed inset-0 bg-inverse-surface/40 backdrop-blur-xs transition-opacity duration-300 opacity-0" onclick="closeModal('modalTransfer')"></div>
+<div class="fixed inset-x-0 bottom-0 max-w-[640px] mx-auto z-10">
+<div class="modal-content bg-surface-container-lowest rounded-t-2xl shadow-xl p-5 border-t border-outline-variant/30 transform translate-y-full transition-transform duration-300 ease-out flex flex-col gap-4 max-h-[90vh] overflow-y-auto custom-scroll pb-safe">
+<!-- Sheet Handle -->
+<div class="w-10 h-1 bg-outline-variant/60 rounded-full mx-auto self-center"></div>
+<div class="flex items-center justify-between pb-1 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-secondary-container/70 text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">send</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="modalTransferTitle">Kirim Uang / Patungan</h3>
+</div>
+<button aria-label="Tutup" class="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant" onclick="closeModal('modalTransfer')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Teman Kos / Favorit -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">PILIH TEMAN / PENERIMA CEPAT</label>
+<div class="flex gap-2 overflow-x-auto pb-1 custom-scroll">
+<button class="recipient-chip flex items-center gap-2 p-2 rounded-xl bg-surface-container-low border border-transparent hover:border-secondary transition-all shrink-0 active:scale-95 text-left" onclick="selectRecipient('Dimas (Kos Salemba)', 'GoPay • 08123456789')" type="button">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">D</span>
+<div>
+<p class="font-label-md text-xs font-semibold text-on-surface">Dimas Kos</p>
+<p class="text-[10px] text-on-surface-variant">GoPay</p>
+</div>
+</button>
+<button class="recipient-chip flex items-center gap-2 p-2 rounded-xl bg-surface-container-low border border-transparent hover:border-secondary transition-all shrink-0 active:scale-95 text-left" onclick="selectRecipient('Siti (Ketua Kelas B)', 'BCA • 5420912831')" type="button">
+<span class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs">S</span>
+<div>
+<p class="font-label-md text-xs font-semibold text-on-surface">Siti B</p>
+<p class="text-[10px] text-on-surface-variant">BCA Patungan</p>
+</div>
+</button>
+<button class="recipient-chip flex items-center gap-2 p-2 rounded-xl bg-surface-container-low border border-transparent hover:border-secondary transition-all shrink-0 active:scale-95 text-left" onclick="selectRecipient('Ibu Kos Pondok 3', 'BRI • 01928374619')" type="button">
+<span class="w-7 h-7 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-bold text-xs">K</span>
+<div>
+<p class="font-label-md text-xs font-semibold text-on-surface">Ibu Kos</p>
+<p class="text-[10px] text-on-surface-variant">BRI</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Input Rekening -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="transferRecipientInput">Nama / Nomor Rekening</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant bg-surface text-on-surface text-sm focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary" id="transferRecipientInput" placeholder="Masukkan nomor e-wallet atau rekening" type="text" value="Dimas (Kos Salemba)"/>
+</div>
+<!-- Input Nominal -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant">Nominal Transfer (Rp)</label>
+<div class="relative">
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-primary text-sm">Rp</span>
+<input class="w-full pl-11 pr-3.5 py-2.5 rounded-xl border border-outline-variant bg-surface text-on-surface text-base font-semibold focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary" id="transferAmountInput" placeholder="0" type="number" value="25000"/>
+</div>
+<!-- Preset Chips -->
+<div class="flex gap-2 pt-1">
+<button class="px-2.5 py-1 rounded-lg text-xs bg-surface-container text-primary font-medium hover:bg-secondary-container" onclick="setTransferAmount(15000)" type="button">15 rb</button>
+<button class="px-2.5 py-1 rounded-lg text-xs bg-surface-container text-primary font-medium hover:bg-secondary-container" onclick="setTransferAmount(25000)" type="button">25 rb</button>
+<button class="px-2.5 py-1 rounded-lg text-xs bg-surface-container text-primary font-medium hover:bg-secondary-container" onclick="setTransferAmount(50000)" type="button">50 rb</button>
+<button class="px-2.5 py-1 rounded-lg text-xs bg-surface-container text-primary font-medium hover:bg-secondary-container" onclick="setTransferAmount(100000)" type="button">100 rb</button>
+</div>
+</div>
+<!-- Catatan Opsional -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="transferNoteInput">Catatan (Opsional)</label>
+<input class="w-full px-3.5 py-2 rounded-xl border border-outline-variant bg-surface text-on-surface text-sm focus:outline-none focus:border-secondary" id="transferNoteInput" placeholder="Misal: Patungan makan malam / listrik" type="text" value="Patungan makan malam"/>
+</div>
+<button class="h-12 w-full mt-2 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all shadow-md" id="btnConfirmTransfer" onclick="processTransfer()" type="button">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span>Konfirmasi &amp; Kirim Sekarang</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. Modal: Top Up & QRIS Scanner -->
+<div aria-labelledby="modalQRISTitle" aria-modal="true" class="fixed inset-0 z-50 hidden" id="modalQRIS" role="dialog">
+<div class="modal-backdrop fixed inset-0 bg-inverse-surface/50 backdrop-blur-xs transition-opacity duration-300 opacity-0" onclick="closeModal('modalQRIS')"></div>
+<div class="fixed inset-x-0 bottom-0 max-w-[640px] mx-auto z-10">
+<div class="modal-content bg-surface-container-lowest rounded-t-2xl shadow-xl p-5 border-t border-outline-variant/30 transform translate-y-full transition-transform duration-300 ease-out flex flex-col gap-4 max-h-[92vh] overflow-y-auto custom-scroll pb-safe">
+<div class="w-10 h-1 bg-outline-variant/60 rounded-full mx-auto self-center"></div>
+<div class="flex items-center justify-between pb-1 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-secondary-container/70 text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">qr_code_scanner</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="modalQRISTitle">QRIS &amp; Pembayaran Instan</h3>
+</div>
+<button aria-label="Tutup" class="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant" onclick="closeModal('modalQRIS')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Scanner Viewfinder Simulation -->
+<div class="relative w-full h-48 bg-slate-900 rounded-xl overflow-hidden flex flex-col items-center justify-center border-2 border-secondary/40 shadow-inner">
+<!-- Animated Laser Beam -->
+<div class="absolute left-6 right-6 h-0.5 bg-secondary shadow-[0_0_12px_#006a63] scanner-beam pointer-events-none"></div>
+<!-- Camera Frame Guides -->
+<div class="w-36 h-36 border-2 border-dashed border-secondary-fixed/80 rounded-lg flex items-center justify-center flex-col gap-1 p-2 text-center bg-black/25">
+<span class="material-symbols-outlined text-secondary-fixed text-[36px] animate-pulse">qr_code_2</span>
+<span class="text-[10px] text-white/80 font-medium">Arahkan ke QR Kantin / Kasir</span>
+</div>
+<!-- Scanner overlay status -->
+<div class="absolute bottom-2 inset-x-0 flex justify-center">
+<span class="text-[11px] bg-black/60 text-white/90 px-3 py-0.5 rounded-full backdrop-blur-xs flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Kamera Sensor Aktif
+            </span>
+</div>
+</div>
+<!-- Pilihan Merchant Kampus Cepat -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant">SIMULASI SCAN QRIS CEPAT</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="p-2.5 rounded-xl border border-outline-variant bg-surface-container-low hover:border-secondary flex items-center gap-2.5 text-left transition-all active:scale-95" onclick="selectQRMerchant('Kantin Salemba Barokah', 15000)" type="button">
+<span class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">restaurant</span>
+<div class="truncate">
+<p class="font-semibold text-xs text-on-surface truncate">Kantin Salemba</p>
+<p class="text-[11px] text-on-surface-variant font-medium">Rp 15.000</p>
+</div>
+</button>
+<button class="p-2.5 rounded-xl border border-outline-variant bg-surface-container-low hover:border-secondary flex items-center gap-2.5 text-left transition-all active:scale-95" onclick="selectQRMerchant('Fotokopi &amp; ATK Salemba', 8000)" type="button">
+<span class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center material-symbols-outlined text-[18px]">print</span>
+<div class="truncate">
+<p class="font-semibold text-xs text-on-surface truncate">ATK &amp; Fotokopi</p>
+<p class="text-[11px] text-on-surface-variant font-medium">Rp 8.000</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Target Merchant Input -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant">Merchant / Tagihan</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface text-sm font-medium" id="qrisMerchantName" readonly="" type="text" value="Kantin Salemba Barokah"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant">Nominal Bayar (Rp)</label>
+<div class="relative">
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-primary text-sm">Rp</span>
+<input class="w-full pl-11 pr-3.5 py-2.5 rounded-xl border border-outline-variant bg-surface text-on-surface text-base font-semibold focus:outline-none focus:border-secondary" id="qrisAmountInput" type="number" value="15000"/>
+</div>
+</div>
+<button class="h-12 w-full mt-1 rounded-xl bg-secondary hover:bg-primary text-on-secondary font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all shadow-md" id="btnPayQRIS" onclick="processQRISPayment()" type="button">
+<span class="material-symbols-outlined text-[20px]">qr_code</span>
+<span>Bayar Instan Sekarang</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 3. Modal: Quick Add / Catat Pengeluaran Cepat (+) -->
+<div aria-labelledby="modalAddExpenseTitle" aria-modal="true" class="fixed inset-0 z-50 hidden" id="modalAddExpense" role="dialog">
+<div class="modal-backdrop fixed inset-0 bg-inverse-surface/40 backdrop-blur-xs transition-opacity duration-300 opacity-0" onclick="closeModal('modalAddExpense')"></div>
+<div class="fixed inset-x-0 bottom-0 max-w-[640px] mx-auto z-10">
+<div class="modal-content bg-surface-container-lowest rounded-t-2xl shadow-xl p-5 border-t border-outline-variant/30 transform translate-y-full transition-transform duration-300 ease-out flex flex-col gap-4 max-h-[90vh] overflow-y-auto custom-scroll pb-safe">
+<div class="w-10 h-1 bg-outline-variant/60 rounded-full mx-auto self-center"></div>
+<div class="flex items-center justify-between pb-1 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center material-symbols-outlined text-[18px]">edit_note</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="modalAddExpenseTitle">Catat Transaksi Pengeluaran</h3>
+</div>
+<button aria-label="Tutup" class="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant" onclick="closeModal('modalAddExpense')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="expenseTitleInput">Keterangan / Tempat</label>
+<input class="w-full px-3.5 py-2.5 rounded-xl border border-outline-variant bg-surface text-on-surface text-sm focus:outline-none focus:border-secondary" id="expenseTitleInput" placeholder="Misal: Es Teh Kampus, Fotokopi Tugas" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="expenseAmountInput">Jumlah (Rp)</label>
+<div class="relative">
+<span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-primary text-sm">Rp</span>
+<input class="w-full pl-11 pr-3.5 py-2.5 rounded-xl border border-outline-variant bg-surface text-on-surface text-base font-semibold focus:outline-none focus:border-secondary" id="expenseAmountInput" placeholder="0" type="number"/>
+</div>
+</div>
+<!-- Kategori Pilihan -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant">Kategori Pengeluaran</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="flex items-center gap-2 p-2 rounded-xl border border-outline-variant/60 cursor-pointer hover:bg-surface-container-low">
+<input checked="" class="text-secondary focus:ring-secondary" name="expenseCategory" type="radio" value="Makanan &amp; Kantin"/>
+<span class="font-label-md text-xs font-medium">Makanan &amp; Kantin</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-xl border border-outline-variant/60 cursor-pointer hover:bg-surface-container-low">
+<input class="text-secondary focus:ring-secondary" name="expenseCategory" type="radio" value="Transport &amp; KRL"/>
+<span class="font-label-md text-xs font-medium">Transport &amp; KRL</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-xl border border-outline-variant/60 cursor-pointer hover:bg-surface-container-low">
+<input class="text-secondary focus:ring-secondary" name="expenseCategory" type="radio" value="Buku &amp; Fotokopi"/>
+<span class="font-label-md text-xs font-medium">Buku &amp; Fotokopi</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded-xl border border-outline-variant/60 cursor-pointer hover:bg-surface-container-low">
+<input class="text-secondary focus:ring-secondary" name="expenseCategory" type="radio" value="Nongkrong / Kopi"/>
+<span class="font-label-md text-xs font-medium">Nongkrong / Kopi</span>
+</label>
+</div>
+</div>
+<button class="h-12 w-full mt-1 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all shadow-md" onclick="submitQuickExpense()" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Simpan ke Catatan Harian</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Feedback -->
+<div class="fixed top-5 inset-x-0 mx-auto max-w-sm z-50 px-4 pointer-events-none transform -translate-y-24 opacity-0 transition-all duration-300" id="toastNotification">
+<div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-inverse-surface text-inverse-on-surface shadow-lg border border-white/10">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]" id="toastIcon">check_circle</span>
+<span class="text-xs font-medium leading-snug flex-1" id="toastMessage">Transaksi Berhasil Disimpan!</span>
+</div>
+</div>
+<!-- JavaScript Interactions -->
+<script>
+    // Global State
+    let currentBalance = 2450000;
+    let isBalanceHidden = false;
+
+    // Helper Format Rupiah
+    function formatRp(num) {
+      return 'Rp ' + Number(num).toLocaleString('id-ID');
+    }
+
+    // Modal Manager
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        const backdrop = modal.querySelector('.modal-backdrop');
+        const content = modal.querySelector('.modal-content');
+        if (backdrop) backdrop.classList.remove('opacity-0');
+        if (content) content.classList.remove('translate-y-full');
+      }, 10);
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      const backdrop = modal.querySelector('.modal-backdrop');
+      const content = modal.querySelector('.modal-content');
+      if (backdrop) backdrop.classList.add('opacity-0');
+      if (content) content.classList.add('translate-y-full');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 280);
+    }
+
+    // Toast Manager
+    let toastTimeout;
+    function showToast(message, icon = 'check_circle') {
+      const toast = document.getElementById('toastNotification');
+      const msgEl = document.getElementById('toastMessage');
+      const iconEl = document.getElementById('toastIcon');
+      if (!toast) return;
+
+      msgEl.innerText = message;
+      iconEl.innerText = icon;
+
+      clearTimeout(toastTimeout);
+      toast.classList.remove('-translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('-translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2600);
+    }
+
+    // Balance Hide/Show Toggle
+    document.getElementById('btnToggleBalance').addEventListener('click', () => {
+      isBalanceHidden = !isBalanceHidden;
+      const display = document.getElementById('displayBalance');
+      if (isBalanceHidden) {
+        display.innerText = 'Rp ••••••••';
+        showToast('Saldo disembunyikan', 'visibility_off');
+      } else {
+        display.innerText = formatRp(currentBalance);
+        showToast('Saldo ditampilkan', 'visibility');
+      }
+    });
+
+    // Profile Quick Click
+    document.getElementById('btnProfileQuick').addEventListener('click', () => {
+      showToast('Alex • Mahasiswa UI Salemba (Semester 3)', 'account_circle');
+    });
+
+    // Event Listeners for Open Modals
+    document.getElementById('btnOpenTransfer').addEventListener('click', () => {
+      openModal('modalTransfer');
+    });
+
+    document.getElementById('btnOpenQRIS').addEventListener('click', () => {
+      openModal('modalQRIS');
+    });
+
+    document.getElementById('btnQuickAdd').addEventListener('click', () => {
+      openModal('modalAddExpense');
+    });
+
+    // Transfer Modal Helpers
+    function selectRecipient(name, detail) {
+      const input = document.getElementById('transferRecipientInput');
+      if (input) input.value = name;
+      showToast(`Penerima terpilih: ${name}`);
+    }
+
+    function setTransferAmount(amt) {
+      const input = document.getElementById('transferAmountInput');
+      if (input) input.value = amt;
+    }
+
+    function processTransfer() {
+      const recipient = document.getElementById('transferRecipientInput').value || 'Teman Kos';
+      const amount = parseInt(document.getElementById('transferAmountInput').value) || 0;
+      const note = document.getElementById('transferNoteInput').value || 'Transfer';
+
+      if (amount <= 0) {
+        showToast('Mohon masukkan nominal yang valid', 'error');
+        return;
+      }
+      if (amount > currentBalance) {
+        showToast('Saldo tidak mencukupi untuk transfer ini', 'warning');
+        return;
+      }
+
+      currentBalance -= amount;
+      if (!isBalanceHidden) {
+        document.getElementById('displayBalance').innerText = formatRp(currentBalance);
+      }
+
+      addTransactionItem(recipient, amount, 'Baru saja');
+      closeModal('modalTransfer');
+      showToast(`Transfer ${formatRp(amount)} ke ${recipient} berhasil!`, 'verified');
+    }
+
+    // QRIS Helpers
+    function selectQRMerchant(name, amount) {
+      document.getElementById('qrisMerchantName').value = name;
+      document.getElementById('qrisAmountInput').value = amount;
+    }
+
+    function processQRISPayment() {
+      const merchant = document.getElementById('qrisMerchantName').value || 'Merchant QRIS';
+      const amount = parseInt(document.getElementById('qrisAmountInput').value) || 0;
+
+      if (amount <= 0) {
+        showToast('Nominal QRIS tidak valid', 'error');
+        return;
+      }
+      if (amount > currentBalance) {
+        showToast('Saldo tidak cukup untuk bayar QRIS', 'warning');
+        return;
+      }
+
+      currentBalance -= amount;
+      if (!isBalanceHidden) {
+        document.getElementById('displayBalance').innerText = formatRp(currentBalance);
+      }
+
+      addTransactionItem(merchant, amount, 'Baru saja');
+      closeModal('modalQRIS');
+      showToast(`Pembayaran ${formatRp(amount)} di ${merchant} lunas!`, 'qr_code_2');
+    }
+
+    // Shortcut 1-Click Fast Pay
+    function quickPayPreset(name, amount, iconName) {
+      if (amount > currentBalance) {
+        showToast('Saldo tidak cukup', 'warning');
+        return;
+      }
+      currentBalance -= amount;
+      if (!isBalanceHidden) {
+        document.getElementById('displayBalance').innerText = formatRp(currentBalance);
+      }
+      addTransactionItem(name, amount, 'Baru saja', iconName);
+      showToast(`Bayar Cepat: ${name} (${formatRp(amount)}) Berhasil!`, 'task_alt');
+    }
+
+    // Submit Quick Add Expense
+    function submitQuickExpense() {
+      const title = document.getElementById('expenseTitleInput').value.trim() || 'Pengeluaran Cepat';
+      const amount = parseInt(document.getElementById('expenseAmountInput').value) || 0;
+      const catInputs = document.getElementsByName('expenseCategory');
+      let cat = 'Pengeluaran';
+      for (const c of catInputs) {
+        if (c.checked) cat = c.value;
+      }
+
+      if (amount <= 0) {
+        showToast('Masukkan jumlah pengeluaran yang valid', 'error');
+        return;
+      }
+
+      currentBalance -= amount;
+      if (!isBalanceHidden) {
+        document.getElementById('displayBalance').innerText = formatRp(currentBalance);
+      }
+
+      addTransactionItem(title, amount, 'Baru saja');
+      closeModal('modalAddExpense');
+      document.getElementById('expenseTitleInput').value = '';
+      document.getElementById('expenseAmountInput').value = '';
+      showToast(`Catatan tersimpan: ${title} (${formatRp(amount)})`, 'bookmark_added');
+    }
+
+    // Insert New Transaction DOM
+    function addTransactionItem(title, amount, time, icon = 'receipt_long') {
+      const list = document.getElementById('transactionList');
+      if (!list) return;
+      const newRow = document.createElement('div');
+      newRow.className = 'flex items-center justify-between pt-2 cursor-pointer hover:bg-surface-container-low/40 p-1.5 rounded-lg transition-colors animate-fadeIn';
+      newRow.onclick = function() {
+        showTransactionDetail(title, formatRp(amount), time, 'Transaksi Baru');
+      };
+      newRow.innerHTML = `
+        <div class="flex items-center gap-space-sm min-w-0">
+          <div class="w-9 h-9 rounded-full bg-secondary-container/60 flex items-center justify-center text-secondary shrink-0">
+            <span class="material-symbols-outlined text-[20px]">${icon}</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="font-body-md text-body-md text-on-surface font-semibold truncate">${title}</span>
+            <span class="font-label-md text-label-md text-on-surface-variant">${time} • Berhasil</span>
+          </div>
+        </div>
+        <span class="font-body-md text-body-md text-error font-semibold shrink-0">-${formatRp(amount)}</span>
+      `;
+      list.prepend(newRow);
+    }
+
+    // Detail Transaksi Trigger
+    function showTransactionDetail(name, amount, time, desc) {
+      showToast(`${name}: -${amount} (${time}) - ${desc}`, 'receipt');
+    }
+
+    // Category Filter Switch
+    function switchCategoryFilter(period) {
+      const btnMonth = document.getElementById('catFilterMonth');
+      const btnWeek = document.getElementById('catFilterWeek');
+      if (!btnMonth || !btnWeek) return;
+
+      if (period === 'week') {
+        btnWeek.className = 'px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white text-secondary shadow-xs';
+        btnMonth.className = 'px-2 py-0.5 rounded-md text-[11px] font-medium text-on-surface-variant hover:text-on-surface';
+        
+        document.getElementById('catAmount1').innerText = 'Rp 195.000';
+        document.getElementById('catPct1').innerText = '48%';
+        document.getElementById('catBar1').style.width = '48%';
+
+        document.getElementById('catAmount2').innerText = 'Rp 115.000';
+        document.getElementById('catPct2').innerText = '28%';
+        document.getElementById('catBar2').style.width = '28%';
+
+        document.getElementById('catAmount3').innerText = 'Rp 50.000';
+        document.getElementById('catPct3').innerText = '14%';
+        document.getElementById('catBar3').style.width = '14%';
+
+        document.getElementById('catAmount4').innerText = 'Rp 40.000';
+        document.getElementById('catPct4').innerText = '10%';
+        document.getElementById('catBar4').style.width = '10%';
+        showToast('Data kategori: Minggu ke-7 kuliah', 'calendar_today');
+      } else {
+        btnMonth.className = 'px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white text-secondary shadow-xs';
+        btnWeek.className = 'px-2 py-0.5 rounded-md text-[11px] font-medium text-on-surface-variant hover:text-on-surface';
+
+        document.getElementById('catAmount1').innerText = 'Rp 780.000';
+        document.getElementById('catPct1').innerText = '42%';
+        document.getElementById('catBar1').style.width = '42%';
+
+        document.getElementById('catAmount2').innerText = 'Rp 460.000';
+        document.getElementById('catPct2').innerText = '25%';
+        document.getElementById('catBar2').style.width = '25%';
+
+        document.getElementById('catAmount3').innerText = 'Rp 370.000';
+        document.getElementById('catPct3').innerText = '20%';
+        document.getElementById('catBar3').style.width = '20%';
+
+        document.getElementById('catAmount4').innerText = 'Rp 240.000';
+        document.getElementById('catPct4').innerText = '13%';
+        document.getElementById('catBar4').style.width = '13%';
+        showToast('Data kategori: Periode Bulan Ini', 'calendar_month');
+      }
+    }
+
+    // Bottom Navigation Active State
+    function switchNavTab(btnElement, name) {
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.className = 'nav-item min-w-[48px] min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors';
+      });
+      btnElement.className = 'nav-item min-w-[48px] min-h-[48px] flex flex-col items-center justify-center gap-0.5 text-primary font-semibold';
+      if (name !== 'Beranda') {
+        showToast(`Membuka tab ${name}...`, 'tab');
+      } else {
+        document.getElementById('mainScrollArea').scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</body></html>
